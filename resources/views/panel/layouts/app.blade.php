@@ -29,7 +29,13 @@
     <link href="{{ url('') }}/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="{{ url('') }}/assets/vendor/simple-datatables/style.css" rel="stylesheet">
     <link href="{{ url('') }}/assets/css/style.css" rel="stylesheet">
-    @yield('style')
+
+
+
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+
+    {{-- @yield('style') --}}
 
 </head>
 
@@ -57,6 +63,12 @@
 
     <!-- Template Main JS File -->
     <script src="{{ url('') }}/assets/js/main.js"></script>
+    <script src="{{ url('') }}/assets/js/input_file.js"></script>
+
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+    <script src="{{ url('') }}/assets/js/sweetalert2.js"></script>
+
     @yield('script')
 
 </body>

@@ -1,7 +1,10 @@
 @extends('panel.layouts.app')
 
 @section('content')
-    <div class="pagetitle">
+    <div class="pagetitle d-flex align-items-center">
+        <a href="{{ url('panel/user') }}" class="btn btn-danger me-2 btn-sm" style="background: #F43F5E;">
+            <i class="bi bi-arrow-left"></i>
+        </a>
         <h1 style="color: #F43F5E; font-weight: bold;">Edit User</h1>
     </div><!-- End Page Title -->
 

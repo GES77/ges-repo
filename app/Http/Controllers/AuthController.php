@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -22,6 +20,7 @@ class AuthController extends Controller
 
     public function auth_login(Request $request)
     {
+        // dd($request->all());
         $remember = !empty($request->remember) ? true : false;
         if(Auth::attempt(['username' => $request->username, 'password' => $request->password], $remember))
         {

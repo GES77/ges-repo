@@ -19,10 +19,10 @@
 
                             <div class="col-md-6" style="text-align: right;">
                                 @if (!empty($PermissionAdd))
-                                <a href="{{ url('panel/ba/add') }}" class="btn btn-tambah" style="margin-top: 10px;">
-                                    <i class="bi bi-plus-square-fill"></i>
-                                    <span>Tambah Berita Acara</span>
-                                </a>
+                                    <a href="{{ url('panel/ba/add') }}" class="btn btn-tambah" style="margin-top: 10px;">
+                                        <i class="bi bi-plus-square-fill"></i>
+                                        <span>Tambah Berita Acara</span>
+                                    </a>
                                 @endif
                             </div>
                         </div>
@@ -38,34 +38,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>nama</td>
-                                    <td>nama</td>
-                                    <td>nama</td>
-                                    <td>
-                                        @if (!empty($PermissionEdit))
-                                        <a href="{{ url('') }}"
-                                            class="btn btn-edit btn-sm">Edit</a>
-                                        @endif
+                                @forelse ($getRecord as $value)
+                                    <tr>
+                                        <td>{{ ($value->created_at)->format('d M Y') }}</td>
+                                        <td>{{ $value->uploader }}</td>
+                                        <td>{{ $value->nama_file }}</td>
+                                        <td>
+                                            @if (!empty($PermissionEdit))
+                                                <a href="{{ route('berita.edit', $value->id) }}" class="btn btn-edit btn-sm mt-1">Edit</a>
+                                            @endif
 
-                                        @if (!empty($PermissionPreview))
-                                        <a href="{{ url('') }}"
-                                            class="btn btn-preview btn-sm">Preview</a>
-                                        @endif
+                                            @if (!empty($PermissionPreview))
+                                                <a href="{{ route('berita.preview', $value->id) }}" class="btn btn-preview btn-sm mt-1">Preview</a>
+                                            @endif
 
-                                        @if (!empty($PermissionDownload))
-                                        <a href="{{ url('') }}"
-                                            class="btn btn-download btn-sm">Download</a>
-                                        @endif
+                                            @if (!empty($PermissionDownload))
+                                                <a href="{{ route('berita.download', $value) }}" class="btn btn-download btn-sm mt-1">Download</a>
+                                            @endif
 
-                                        @if (!empty($PermissionDelete))
-                                        <a href="{{ url('') }}"
-                                            class="btn btn-hapus btn-sm">Hapus</a>
-                                        @endif
+                                            @if (!empty($PermissionDelete))
+                                                <a href="{{ route('berita.delete', $value->id) }}" class="btn btn-hapus btn-sm mt-1">Hapus</a>
+                                            @endif
 
-                                    </td>
-                                </tr>
-
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center">Data masih kosong</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                         <!-- End Table with stripped rows -->

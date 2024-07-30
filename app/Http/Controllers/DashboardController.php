@@ -15,18 +15,11 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-
-        $currentUser = Auth::user();
-        $roleName = DB::table('users')
-            ->join('role', 'users.role_id', '=', 'role.nama')
-            ->where('users.id', $currentUser->id)
-            ->value('role.nama'); // Asumsikan kolom nama peran adalah 'name'
-
         $data['PermissionAdd'] = PermissionRoleModel::getPermission('Add User', Auth::user()->role_id);
         $data['PermissionEdit'] = PermissionRoleModel::getPermission('Edit User', Auth::user()->role_id);
         $data['PermissionDelete'] = PermissionRoleModel::getPermission('Delete User', Auth::user()->role_id);
         $data['getRecord'] = User::getRecord();
-        return view('panel.user.dashboard', $data, compact('currentUser', 'roleName'));
+        return view('panel.user.dashboard', $data);
     }
 
     public function add()

@@ -46,16 +46,17 @@
                                         <td>{{ $value->nama }}</td>
                                         <td>{{ $value->username }}</td>
                                         <td>{{ $value->role_name }}</td>
-                                        <td>{{ $value->created_at }}</td>
+                                        {{-- <td>{{ $value->created_at }}</td> --}}
+                                        <td>{{ ($value->created_at)->format('d M Y') }}</td>
                                         @if (!empty($PermissionEdit) || !empty($PermissionDelete))
                                             <td>
                                                 @if (!empty($PermissionEdit))
                                                     <a href="{{ url('panel/user/edit/' . $value->id) }}"
-                                                        class="btn btn-edit btn-sm">Edit</a>
+                                                        class="btn btn-edit btn-sm mt-1">Edit</a>
                                                 @endif
                                                 @if (!empty($PermissionDelete))
                                                     <a href="{{ url('panel/user/delete/' . $value->id) }}"
-                                                        class="btn btn-hapus btn-sm">Hapus</a>
+                                                        class="btn btn-hapus btn-sm mt-1">Hapus</a>
                                                 @endif
                                             </td>
                                         @endif

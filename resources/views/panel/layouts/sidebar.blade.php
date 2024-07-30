@@ -169,7 +169,7 @@
 
           @if (!empty($PermissionBA))
               <li class="nav-item">
-                  <a class="nav-link @if (Request::segment(2) != 'berita') collapsed @endif" href="{{ url('panel/ba') }}">
+                  <a class="nav-link @if (Request::segment(2) != 'ba') collapsed @endif" href="{{ url('panel/ba') }}">
                       <i class="bi bi-journal-text"></i>
                       <span>Berita Acara</span>
                   </a>
