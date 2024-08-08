@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -20,6 +19,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'otp',
+        'otp_created_at',
     ];
 
     /**
@@ -30,6 +31,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'otp',
+    ];
+
+    protected $casts = [
+        'otp_created_at' => 'datetime',
     ];
 
     /**
@@ -53,10 +59,10 @@ class User extends Authenticatable
     static public function getRecord()
     {
         $result = User::select('users.*', 'role.nama as role_name')
-        ->join('role', 'users.role_id', '=', 'role.id')
-        ->distinct()
-        ->orderBy('users.id', 'desc')
-        ->get();
+            ->join('role', 'users.role_id', '=', 'role.id')
+            ->distinct()
+            ->orderBy('users.id', 'desc')
+            ->get();
 
         return $result;
     }

@@ -70,9 +70,11 @@ class RoleController extends Controller
             abort(404);
         }
         // $getPermission = PermissionModel::getRecord();
-        $data['getRecord'] = RoleModel::getSingle($id);
+        $role = RoleModel::getSingle($id);
+        $data['getRecord'] = $role;
         $data['getPermission'] = PermissionModel::getRecord();
         $data['getRolePermission'] = PermissionRoleModel::getRolePermission($id);
+        $data['isSuperAdmin'] = $role->is_super_admin;
         return view('panel.role.edit', $data);
     }
     // MENGEDIT DATA ROLE
@@ -103,7 +105,11 @@ class RoleController extends Controller
         {
             abort(404);
         }
+
         $save = RoleModel::getSingle($id);
+        if ($save->is_super_admin) {
+            return redirect()->back()->with('error', 'Tidak bisa menghapus role ini!');
+        }
         $save->delete();
 
 

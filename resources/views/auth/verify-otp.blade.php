@@ -21,58 +21,56 @@
         <div class="row">
             <div class="col-md-6 half-screen colored-half d-flex align-items-center justify-content-center">
                 <div class="content">
-                    <h1 class="text-white animate__animated animate__fadeInDown">Selamat Datang</h1>
-                    <p class="text-white animate__animated animate__fadeInDown">Selamat Pagi! Pagi! Pagi! Pagi!</p>
-                    <img src="{{ url('') }}/assets/img/illus_login.png" class="img_login animate__animated animate__fadeIn"
+                    <h1 class="text-white ">Selamat Datang</h1>
+                    <p class="text-white ">Selamat Pagi! Pagi! Pagi! Pagi!</p>
+                    <img src="{{ url('') }}/assets/img/illus_login.png" class="img_login "
                         alt="Colored half illustration">
                 </div>
-                <svg class="top-left-curve animate__animated animate__rotateInDownLeft" viewBox="0 0 400 400" preserveAspectRatio="none">
+                <svg class="top-left-curve " viewBox="0 0 400 400" preserveAspectRatio="none">
                     <path d="M0,100 Q90,50 100,0" stroke="white" stroke-opacity="0.5" stroke-width="4" fill="none" />
                 </svg>
-                <svg class="bottom-right-curve animate__animated animate__rotateInUpLeft" viewBox="0 -10 50 100" preserveAspectRatio="none">
+                <svg class="bottom-right-curve " viewBox="0 -10 50 100" preserveAspectRatio="none">
                     <path d="M20,120 Q30,30 100,100" stroke="white" stroke-width="1" fill="none" />
                 </svg>
             </div>
             <div class="col-md-6 half-screen white-half d-flex align-items-center justify-content-center">
                 <div class="login-form">
-                    <h2 class="">Masuk Akun</h2>
-                    <p class="">Masukan username serta kata sandi anda !</p>
+                    <h2 class="">OTP</h2>
+                    <p class="">Silahkan lihat kode OTP yang telah dikirimkan melalui Telegram</p>
 
                     @include('auth._message')
 
-                    <form action="" method="post">
+                    <form action="{{ route('otp.verify.post') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group mt-4 ">
-                            <label for="username">Username<span style="color: red">*</span></label>
-                            <input type="text" name="username" class="form-control" id="username"
-                                placeholder="Tulis username anda" required>
-                        </div>
-                        <div class="form-group ">
-                            <label for="password">Password<span style="color: red">*</span></label>
-                            {{-- <input type="password" name="password" class="form-control" id="password"
-                                placeholder="Tulis kata sandi anda" required> --}}
-                            <input class="form-control" type="password" data-toggle="password" name="password"
-                                id="password" placeholder="Tulis kata sandi anda" required>
+                            <label for="otp">OTP<span style="color: red">*</span></label>
+                            <input id="otp" type="text" maxlength="6"
+                                class="form-control @error('otp') is-invalid @enderror" name="otp" required
+                                autofocus placeholder="Input kode OTP anda">
+                            @error('otp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
-                        <div class="form-group d-flex justify-content-between align-items-center ">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="rememberMe" name="remember">
-                                <label class="form-check-label" for="rememberMe">Remember Me</label>
-                            </div>
-                            {{-- <a href="#" class="forgot-password-link">Forgot Password?</a> --}}
-                        </div>
                         <button class="btn btn-login text-white mt-2 " type="submit">
                             {{-- <a href="admin" class="text-white text-decoration-none"> --}}
-                            Masuk
+                            Verifikasi
                             {{-- </a> --}}
                         </button>
                     </form>
+                    <form action="{{ route('otp.resend') }}" method="post" style="margin-top: 10px;">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-primary " id="resend-otp-btn">Resend OTP</button>
+                    </form>
+                    {{-- <div id="timer" class="mt-3"></div> --}}
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="{{ url('') }}/assets/js/timer.js"></script>
     <script src="{{ url('') }}/https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
     <script src="{{ url('') }}/https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url('') }}/https://unpkg.com/bootstrap-show-password@1.3.0/dist/bootstrap-show-password.min.js">
@@ -81,10 +79,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script> --}}
-    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
-    {{-- <script src="https://unpkg.com/bootstrap-show-password@1.3.0/dist/bootstrap-show-password.min.js"></script> --}}
+
 </body>
 
 </html>

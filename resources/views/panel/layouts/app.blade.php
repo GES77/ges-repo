@@ -30,8 +30,8 @@
     <link href="{{ url('') }}/assets/vendor/simple-datatables/style.css" rel="stylesheet">
     <link href="{{ url('') }}/assets/css/style.css" rel="stylesheet">
 
-
-
+    {{-- Animated CSS --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- SweetAlert CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 
@@ -44,7 +44,7 @@
     @include('panel.layouts.header')
     @include('panel.layouts.sidebar')
 
-    <main id="main" class="main">
+    <main id="main" class="main animate__animated animate__fadeIn">
         @yield('content')
     </main><!-- End #main -->
 
@@ -67,7 +67,8 @@
 
     <!-- SweetAlert JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
-    <script src="{{ url('') }}/assets/js/sweetalert2.js"></script>
+    <script src="{{ url('') }}/assets/js/delete.js"></script>
+    <script src="{{ url('') }}/assets/js/logout.js"></script>
 
     @yield('script')
 

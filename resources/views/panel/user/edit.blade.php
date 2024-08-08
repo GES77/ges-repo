@@ -50,7 +50,7 @@
                             <div class="row mb-3">
                                 <label for="inputText" class="col-sm-12 col-form-label">Role</label>
                                 <div class="col-sm-12">
-                                    <select class="form-control cursor-pointer" name="role_id" required id="">
+                                    <select class="form-control cursor-pointer" name="role_id" required id="" {{ $isSuperAdmin ? 'disabled' : '' }}>
                                         <option value="">Pilih Role</option>
                                         @foreach ($getRole as $value)
                                         <option {{  ($getRecord->role_id == $value->id) ? 'selected' : ''  }} value="{{ $value->id }}">{{ $value->nama }}</option>

@@ -21,15 +21,18 @@ use App\Http\Controllers\OblP5Controller;
 use App\Http\Controllers\OblP6Controller;
 use App\Http\Controllers\OblP7Controller;
 use App\Http\Controllers\OblP8Controller;
+use App\Http\Controllers\OTPController;
 
-Route::get('/', [AuthController::class, 'login']);
+Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/', [AuthController::class, 'auth_login']);
 Route::get('logout', [AuthController::class, 'logout']);
 
+Route::get('/otp-verify', [AuthController::class, 'showVerifyForm'])->name('auth.verify');
+Route::post('/otp-verify', [AuthController::class, 'verify'])->name('otp.verify.post');
+Route::post('otp/resend', [AuthController::class, 'resendOtp'])->name('otp.resend');
 
-Route::group(['middleware' => 'useradmin'], function () {
 
-
+Route::group(['middleware' => ['useradmin', 'verify.otp']], function () {
     // ROLE
     Route::get('panel/role', [RoleController::class, 'list']);
     Route::get('panel/role/add', [RoleController::class, 'add']);

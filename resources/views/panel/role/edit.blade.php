@@ -22,7 +22,7 @@
                                 <label for="inputText" class="col-sm-12 col-form-label">Nama Role</label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" required name="nama"
-                                        value="{{ $getRecord->nama }}">
+                                        value="{{ $getRecord->nama }}" {{ $isSuperAdmin ? 'disabled' : '' }}>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -49,7 +49,8 @@
                                                     <div class="col-md-4 mt-2">
                                                         <label><input type="checkbox" {{ $checked }}
                                                                 value="{{ $group['id'] }}" name="permission_id[]"
-                                                                style="margin-right: 10px;">{{ $group['nama'] }}</label>
+                                                                style="margin-right: 10px; accent-color:#F43F5E;"
+                                                                {{ $isSuperAdmin ? 'disabled' : '' }}>{{ $group['nama'] }}</label>
                                                     </div>
                                                 @endforeach
                                             </div>

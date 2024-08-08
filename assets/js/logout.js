@@ -1,16 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const deleteButtons = document.querySelectorAll('.btn-hapus');
+    const deleteButtons = document.querySelectorAll('.nav-logout');
 
     deleteButtons.forEach(button => {
         button.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default action (navigation)
 
             Swal.fire({
-                title: 'Apakah anda yakin ingin menghapus ini?',
+                title: 'Apakah anda yakin ingin logout?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Ya, Hapus',
-                cancelButtonText: 'Batal',
+                confirmButtonText: 'Ya, Logout',
+                cancelButtonText: 'Tidak',
+                reverseButtons: true,
                 customClass: {
                     confirmButton: 'swal2-confirm',
                     // cancelButton: 'swal2-cancel'

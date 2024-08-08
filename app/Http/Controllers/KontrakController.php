@@ -10,6 +10,14 @@ use App\Models\Kontrak;
 
 class KontrakController extends Controller
 {
+    // FUNGSI UNTUK MEMANGKAS NAMA FILE
+    // public function truncateTitle($title, $length = 45)
+    // {
+    //     if (strlen($title) > $length) {
+    //         return substr($title, 0, $length) . '...';
+    //     }
+    //     return $title;
+    // }
     public function kontrak()
     {
         $data['PermissionAdd'] = PermissionRoleModel::getPermission('Add kontrak', Auth::user()->role_id);
@@ -18,6 +26,9 @@ class KontrakController extends Controller
         $data['PermissionPreview'] = PermissionRoleModel::getPermission('Preview kontrak', Auth::user()->role_id);
         $data['PermissionDelete'] = PermissionRoleModel::getPermission('Delete kontrak', Auth::user()->role_id);
         $data['getRecord'] = Kontrak::getRecord();
+        // foreach ($data['getRecord'] as $record) {
+        //     $record->nama_file = $this->truncateTitle($record->nama_file);
+        // }
         return view('panel.kontrak.kontrak', $data);
     }
     public function add()
@@ -27,11 +38,10 @@ class KontrakController extends Controller
 
     public function insert(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'nama_file' => 'required|string|max:255',
             'dokumen' => 'required|mimes:pdf|max:10240',
-        ],[
+        ], [
             'nama_file.required' => '*Isi nama file terlebih dahulu.',
             'nama_file.max:255' => '*Nama file tidak boleh lebih dari 255 karakter.',
             'dokumen.required' => '*Pilih file terlebih dahulu.',

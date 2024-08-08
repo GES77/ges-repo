@@ -27,14 +27,6 @@ class DashboardController extends Controller
         $data['getRole'] = RoleModel::getRecord();
         return view('panel.user.add', $data);
     }
-
-    public function edit($id)
-    {
-        $data['getRecord'] = User::getSingle($id);
-        $data['getRole'] = RoleModel::getRecord();
-        return view('panel.user.edit', $data);
-    }
-
     public function insert(Request $request)
     {
         $request->validate(
@@ -66,9 +58,22 @@ class DashboardController extends Controller
         return redirect('panel/user')->with('success', "User berhasil dibuat");
     }
 
+    public function edit($id)
+    {
+        $user = User::getSingle($id);
+        $data['getRecord'] = $user;
+        $data['getRole'] = RoleModel::getRecord();
+        $data['isSuperAdmin'] = $user->is_super_admin;
+        return view('panel.user.edit', $data);
+    }
     public function update($id, Request $request)
     {
         $user = User::getSingle($id);
+
+        // Jika pengguna adalah Super Admin, jangan izinkan perubahan role
+        // if ($user->is_super_admin && $user->role_id != trim($request->role_id)) {
+        //     return redirect('panel/user/edit/' . $id)->with('error', "Role Super Admin tidak bisa diubah");
+        // }
         $user->nama = trim($request->nama);
         if (!empty($request->password)) {
             $user->password = Hash::make($request->password);
@@ -82,6 +87,17 @@ class DashboardController extends Controller
     public function delete($id)
     {
         $user = User::getSingle($id);
+
+        // Cek apakah pengguna ada
+        if (!$user) {
+            return redirect()->back()->with('error', 'User tidak ditemukan.');
+        }
+
+        // Cek apakah pengguna adalah super admin
+        if ($user->is_super_admin) {
+            return redirect()->back()->with('error', 'Tidak bisa menghapus akun Super Admin!');
+        }
+
         $user->delete();
 
         return redirect('panel/user')->with('error', "User berhasil dihapus");

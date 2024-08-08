@@ -43,11 +43,16 @@
 
                                 @foreach ($getRecord as $value)
                                     <tr>
-                                        <td>{{ $value->nama }}</td>
+                                        <td>
+                                            @if ($value->is_super_admin)
+                                                <i class="bi bi-star-fill" style="color: #F43F5E"></i>
+                                            @endif
+                                            {{ $value->nama }}
+                                        </td>
                                         <td>{{ $value->username }}</td>
                                         <td>{{ $value->role_name }}</td>
                                         {{-- <td>{{ $value->created_at }}</td> --}}
-                                        <td>{{ ($value->created_at)->format('d M Y') }}</td>
+                                        <td>{{ $value->created_at->format('d M Y') }}</td>
                                         @if (!empty($PermissionEdit) || !empty($PermissionDelete))
                                             <td>
                                                 @if (!empty($PermissionEdit))
@@ -56,8 +61,17 @@
                                                 @endif
                                                 @if (!empty($PermissionDelete))
                                                     <a href="{{ url('panel/user/delete/' . $value->id) }}"
-                                                        class="btn btn-hapus btn-sm mt-1">Hapus</a>
+                                                        class="btn btn-hapus btn-sm mt-1">Delete</a>
                                                 @endif
+                                                {{-- @if (!empty($PermissionDelete))
+                                                    @if ($value->is_super_admin)
+                                                        <a href="{{ url('panel/user/delete/' . $value->id) }}"
+                                                            class="btn btn-hapus btn-sm mt-1 disabled" style="background-color:red;">Delete</a>
+                                                    @else
+                                                        <a href="{{ url('panel/user/delete/' . $value->id) }}"
+                                                            class="btn btn-hapus btn-sm mt-1" >Delete</a>
+                                                    @endif
+                                                @endif --}}
                                             </td>
                                         @endif
 
@@ -70,21 +84,6 @@
 
                     </div>
                 </div>
-                {{-- <div class="footer mt-auto mb-1">
-                    <div class="role">
-                        <div class="column text-c">
-                            <div class="d-flex align-items-center justify-content-center mt-1">
-                                <p class="mb-1"><b>{{ Auth::user()->nama }}</b> </p>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center   ">
-                                @foreach ($getRecord as $value)
-                                <p>{{ $value->role_name }}</p>
-                                @endforeach
-                                <p>{{ $roleName }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
 
             </div>
         </div>

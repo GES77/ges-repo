@@ -49,12 +49,12 @@ html {
 
 .btn-login {
   background-color: #EF4444;
-  width: 80px;
+  width: 100px;
   height: 40px;
 }
 .btn-login:hover {
   background-color: #f87171;
-  width: 80px;
+  width: 100px;
   height: 40px;
   text-decoration: underline;
 }
