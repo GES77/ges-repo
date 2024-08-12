@@ -106,6 +106,7 @@ class AuthController extends Controller
         if ($user) {
             $user->otp = null; // Set token OTP ke null
             $user->otp_created_at = null;
+            $user->remember_token = null;
             /** @var \App\Models\User $user **/
             $user->save(); // Simpan perubahan ke database
         }

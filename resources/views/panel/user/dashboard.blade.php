@@ -44,10 +44,10 @@
                                 @foreach ($getRecord as $value)
                                     <tr>
                                         <td>
-                                            @if ($value->is_super_admin)
-                                                <i class="bi bi-star-fill" style="color: #F43F5E"></i>
-                                            @endif
                                             {{ $value->nama }}
+                                            @if ($value->is_super_admin)
+                                                <i class="bi bi-person-check" style="color: #F43F5E"></i>
+                                            @endif
                                         </td>
                                         <td>{{ $value->username }}</td>
                                         <td>{{ $value->role_name }}</td>

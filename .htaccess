@@ -2,6 +2,11 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires "Sat, 01 Jan 2000 00:00:00 GMT"
+    </IfModule>
 
     RewriteEngine On
 

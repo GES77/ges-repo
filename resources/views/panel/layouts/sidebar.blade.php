@@ -29,7 +29,7 @@
           @if (!empty($PermissionDashboard))
               <li class="nav-item">
                   <a class="nav-link @if (Request::segment(2) != 'user') collapsed @endif " href="{{ url('panel/user') }}">
-                      <i class="bi bi-grid-1x2"></i>
+                      <i class="bi bi-columns-gap"></i>
                       <span>Dashboard</span>
                   </a>
               </li><!-- End Dashboard Nav -->
@@ -49,7 +49,7 @@
                   data-bs-toggle="collapse" href="#">
                   <i class="bi bi-journal-text"></i><span>OBL</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+              <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                   @if (!empty($PermissionP1))
                       <li>
                           <a href="{{ url('panel/obl/p1') }}" class="@if (Request::segment(2) != 'p1') collapsed @endif">
